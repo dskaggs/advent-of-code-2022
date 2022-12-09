@@ -1,4 +1,7 @@
-input = open('input.txt', 'r')
+with open("input.txt") as f:
+    input = f.read().strip()
+
+input = input.split("\n")
 total = 0 # Number of assignment pairs that overlap
 
 def parse_assignments( line ):
@@ -13,7 +16,7 @@ def parse_assignments( line ):
 def between_two_numbers(num,a,b):
     if b < a:
         a, b = b, a
-    if num in range(a,b):
+    if num in range(a,b+1):
         return True
     else:
         return False
