@@ -10,19 +10,25 @@ def parse_assignments( line ):
 
     return { "elf1_start": elf1_start, "elf1_end": elf1_end, "elf2_start": elf2_start, "elf2_end": elf2_end }
 
+def between_two_numbers(num,a,b):
+    if b < a:
+        a, b = b, a
+    if num in range(a,b):
+        return True
+    else:
+        return False
+
 def check_overlap( assignments ):
-    if ( 
-        ( assignments["elf1_start"] >= assignments["elf2_start"] ) and ( assignments["elf1_start"] <= assignments["elf2_end"] ) ) or
-         assignments["elf1_end"] <= assignments["elf2_end"] :
+    if between_two_numbers( assignments["elf1_start"], assignments["elf2_start"], assignments["elf2_end"] ) or between_two_numbers( assignments["elf1_end"], assignments["elf2_start"], assignments["elf2_end"] ):
         return True
-    elif ( assignments["elf2_start"] >= assignments["elf1_start"] ) or ( assignments["elf2_end"] <= assignments["elf1_end"] ):
-        return True
+    elif between_two_numbers( assignments["elf2_start"], assignments["elf1_start"], assignments["elf1_end"] ) or between_two_numbers( assignments["elf2_end"], assignments["elf1_start"], assignments["elf1_end"] ):
+        return True    
     else:
         return False
 
 for line in input:
     assignments = parse_assignments( line )
-
+    
     overlaps = check_overlap( assignments )
 
     if( overlaps ):
