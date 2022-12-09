@@ -33,7 +33,6 @@ def process_move_order( order ):
 
 def move_crate( origin, destination ):
     global stacks
-    #print( "Moving 1 crate from stack " + origin + " to " + destination)
     stacks[ destination ].append( stacks[ origin ][ len( stacks[ origin ]) - 1] )
     stacks[ origin ].pop( len( stacks[ origin ] ) - 1 )
 
